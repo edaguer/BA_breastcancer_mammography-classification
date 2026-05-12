@@ -216,3 +216,14 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project-specific: large data files
+train_images/
+train.csv
+train_balanced_50_50.csv
+train_balanced_1zu3.csv
+train_verfuegbar.csv
+
+# Trained model weights
+*.pth
+
