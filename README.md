@@ -28,6 +28,36 @@ The whole pipeline lives in the notebook `classification_v3.ipynb`.
 > classification in mammography images, and how can this performance be improved
 > through targeted methodological choices?
 
+## Method
+
+**Preprocessing.** Each DICOM is read with pydicom, converted with the VOI-LUT
+(the same windowing a radiologist would see), inverted if needed, cropped to the
+breast area, padded to a square so the aspect ratio is preserved, and resized to
+384x384. Processed images are cached to disk so later notebook runs are fast.
+
+**Split.** The data is split 80/20 by patient, not by image, so that the multiple
+views of one patient (left/right, CC/MLO) never end up in both training and
+validation. Experiment E6 shows what happens without this: an image-level split
+inflates the AUC.
+
+**Models.** Three architectures are compared: a small CNN trained from scratch
+(Model A), a ResNet18 with transfer learning and fine tuning (Model B), and a
+multimodal variant that adds patient age to the ResNet18 features (Model C).
+
+**Ablations (E0 to E7).** Starting from a working baseline, one factor is changed
+at a time: fine tuning depth, learning rate, image resolution, class balancing
+strategy, and training set size. An overfit test (E0) confirms the pipeline can
+learn at all, and repeated training across multiple seeds (E5) gives a 95 percent
+confidence interval instead of relying on a single run.
+
+**Evaluation and interpretability.** AUC is used as the main metric since it does
+not depend on a classification threshold, which matters given the class imbalance.
+The final model is also evaluated as a concrete yes/no classification (confusion
+matrix, precision, recall). Grad-CAM highlights which image regions drove each
+prediction, but since the dataset only has image-level labels and no ground-truth
+bounding boxes, this is an interpretability tool, not a validated tumor
+localization.
+
 ## Repository structure
 
 ```
