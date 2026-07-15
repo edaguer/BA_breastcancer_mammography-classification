@@ -10,7 +10,7 @@ import pandas as pd
 
 # Pfad zum vollständigen Kaggle-Download (Ordner, der die Patienten-Unterordner
 # enthält, also .../train_images). Leer lassen = nur Trockenlauf.
-QUELLE = r'C:'<PATH>'   # vollständiger Kaggle-Download
+QUELLE = r''   # hier eigenen Pfad zum vollständigen Kaggle-Download eintragen
 ZIEL   = 'train_images'          # dein BA-Ordner (relativ zum Projekt)
 CSV    = 'train.csv'
 N_GESUND_ZIEL = 1158             # gleiche Menge wie Krebsfälle
