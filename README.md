@@ -52,11 +52,14 @@ git clone https://github.com/edaguer/BA_breastcancer_mammography-classification.
 cd BA_breastcancer_mammography-classification
 ```
 
-### 2. Install the dependencies
+### 2. Create a conda environment and install the dependencies
 
-Python 3.11 is recommended.
+This project was built and run with [Anaconda](https://www.anaconda.com/download)
+(Python 3.10). From the Anaconda Prompt:
 
 ```bash
+conda create -n ba_breastcancer python=3.10
+conda activate ba_breastcancer
 pip install -r requirements.txt
 ```
 
