@@ -19,18 +19,6 @@ patient_auswahl.py
 patienten_zum_download.txt
 out.txt
 
-# Personal and administrative files
-ba_formular.pdf
-CodeStand_Antworten_Martin.tex
-
-# Planning and writing documents
-Gliederung_BA.docx
-Gliederung_BA_neu.docx
-gliederung_BA_kap2-5.md
-gliederung_BA_kap2-5.docx
-untersuchungsplan.md
-textbaustein_korrekturen.md
-
 # Python
 __pycache__/
 *.pyc
