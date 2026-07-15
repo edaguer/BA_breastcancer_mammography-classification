@@ -1,7 +1,5 @@
-# ============================================================
-# Datensatz erweitern: alle Krebsfaelle + gleiche Menge gesunder Bilder
+# Datensatz erweitern: alle Krebsfälle + gleiche Menge gesunder Bilder
 # in den BA-Ordner train_images/ kopieren.
-# ============================================================
 # Standard: TROCKENLAUF (zeigt nur, was fehlt, kopiert nichts).
 # Zum echten Kopieren unten QUELLE auf deinen 300-GB-Download setzen.
 
@@ -9,15 +7,15 @@ import os
 import shutil
 import pandas as pd
 
-# ---- EINSTELLUNGEN --------------------------------------------------
-# Pfad zum vollstaendigen Kaggle-Download (Ordner, der die Patienten-Unterordner
-# enthaelt, also .../train_images). Leer lassen = nur Trockenlauf.
-QUELLE = r'C:\Users\edagu\Downloads\train_images'   # vollstaendiger Kaggle-Download
+
+# Pfad zum vollständigen Kaggle-Download (Ordner, der die Patienten-Unterordner
+# enthält, also .../train_images). Leer lassen = nur Trockenlauf.
+QUELLE = r'C:'<PATH>'   # vollständiger Kaggle-Download
 ZIEL   = 'train_images'          # dein BA-Ordner (relativ zum Projekt)
 CSV    = 'train.csv'
-N_GESUND_ZIEL = 1158             # gleiche Menge wie Krebsfaelle
+N_GESUND_ZIEL = 1158             # gleiche Menge wie Krebsfälle
 SEED   = 42
-# --------------------------------------------------------------------
+
 
 df = pd.read_csv(CSV)
 
@@ -30,7 +28,7 @@ def ist_lokal(pid, iid):
 krebs = df[df['cancer'] == 1].copy()                       # alle 1158 Krebsfaelle
 gesund_all = df[df['cancer'] == 0].copy()
 
-# Gesunde: vorhandene behalten, dann reproduzierbar auffuellen bis N_GESUND_ZIEL
+# Gesunde: vorhandene behalten, dann reproduzierbar auffüllen bis N_GESUND_ZIEL
 gesund_all['lokal'] = gesund_all.apply(lambda z: ist_lokal(z['patient_id'], z['image_id']), axis=1)
 gesund_lokal = gesund_all[gesund_all['lokal']]
 gesund_rest  = gesund_all[~gesund_all['lokal']]
@@ -74,7 +72,7 @@ out = pd.DataFrame(zeilen)
 out.to_csv('datenauswahl_erweitert.csv', index=False, encoding='utf-8')
 
 # 4) Zusammenfassung
-print('--- Zusammenfassung ---')
+print('Zusammenfassung')
 print(f'Schon im BA-Ordner:        {schon_da}')
 if trockenlauf:
     print(f'Noch zu kopieren (fehlen): {quelle_fehlt}')
@@ -83,4 +81,4 @@ else:
     print(f'Neu kopiert:               {kopiert}')
     print(f'Im Download nicht gefunden:{quelle_fehlt}')
 print(f'\nDetail-Liste gespeichert in: datenauswahl_erweitert.csv')
-print('Benoetigte, aber noch fehlende Patienten stehen dort mit Status fehlt_zu_kopieren / IM_DOWNLOAD_NICHT_GEFUNDEN.')
+print('Benötigte, aber noch fehlende Patienten stehen dort mit Status fehlt_zu_kopieren / IM_DOWNLOAD_NICHT_GEFUNDEN.')
