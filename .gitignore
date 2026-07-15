@@ -8,17 +8,6 @@ bild_cache_*.pkl
 # Trained model weights (too large for Git, reproducible by running the notebook)
 *.pth
 
-# Old drafts and helper scripts from development
-Untitled.ipynb
-classification_v1.ipynb
-check_*.py
-fix_*.py
-kommentare_aktualisieren.py
-find_alten_cache.py
-patient_auswahl.py
-patienten_zum_download.txt
-out.txt
-
 # Python
 __pycache__/
 *.pyc
