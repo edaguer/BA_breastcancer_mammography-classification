@@ -52,17 +52,9 @@ git clone https://github.com/edaguer/BA_breastcancer_mammography-classification.
 cd BA_breastcancer_mammography-classification
 ```
 
-### 2. Create a Python environment
+### 2. Install the dependencies
 
-Python 3.11 is recommended. A virtual environment is optional but useful:
-
-```bash
-python -m venv venv
-venv\Scripts\activate      # Windows
-# source venv/bin/activate   # macOS/Linux
-```
-
-### 3. Install the dependencies
+Python 3.11 is recommended.
 
 ```bash
 pip install -r requirements.txt
@@ -77,7 +69,7 @@ pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
 
 (choose the CUDA version that fits your graphics driver)
 
-### 4. Get the dataset
+### 3. Get the dataset
 
 The dataset is part of the RSNA Kaggle competition and is not included here for
 licensing reasons:
@@ -85,7 +77,7 @@ licensing reasons:
 1. Download it from [Kaggle](https://www.kaggle.com/competitions/rsna-breast-cancer-detection/data)
 2. Place `train.csv` and the folder `train_images/` in the repository root
 
-### 5. Run the notebook
+### 4. Run the notebook
 
 ```bash
 jupyter notebook classification_v3.ipynb
