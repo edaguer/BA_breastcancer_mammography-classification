@@ -141,11 +141,16 @@ reflects the difficulty and the data size rather than a bug, and the learning cu
 
 On the held-out test set (126 patients, 340 images, never used for training or for
 picking the best epoch) the same setup reaches an **AUC of 0.669** (95 percent
-bootstrap confidence interval 0.609 to 0.727). This is essentially the same as the
-0.658 validation AUC of the final model, which means the reported validation scores
-were not noticeably inflated by selecting the best epoch. The test set also shows
-the asymmetry of the model: cancer recall is around 0.50 while healthy recall is
-around 0.77, so a relevant share of cancer cases is still missed.
+bootstrap confidence interval 0.609 to 0.727), at an accuracy of 0.62 with a recall
+of 0.64 for cancer and 0.60 for healthy cases. The validation AUC of that run was
+0.692, so selecting the best epoch on the validation set inflated the score by only
+about 0.02. In other words, the validation numbers reported above were not
+noticeably too optimistic.
+
+A note on stability: the AUC is reproducible across reruns (0.663 and 0.669 in two
+independent runs), while the threshold-dependent metrics move around considerably
+more, since they depend on where the 0.5 cutoff happens to fall. AUC is therefore
+the more reliable number to report here.
 
 One caveat remains: the fine tuning depth (layer3 and layer4) and the learning rate
 were chosen in E3 and E4, which ran on all patients. The weights never see the test
