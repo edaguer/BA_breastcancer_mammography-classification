@@ -38,7 +38,9 @@ breast area, padded to a square so the aspect ratio is preserved, and resized to
 **Split.** The data is split 80/20 by patient, not by image, so that the multiple
 views of one patient (left/right, CC/MLO) never end up in both training and
 validation. Experiment E6 shows what happens without this: an image-level split
-inflates the AUC.
+inflates the AUC. For the final honest evaluation, a separate 70/15/15 split by
+patient adds a test set that is never used for training or for picking the best
+epoch (see "Held-out test set" below).
 
 **Models.** Three architectures are compared: a small CNN trained from scratch
 (Model A), a ResNet18 with transfer learning and fine tuning (Model B), and a
@@ -57,6 +59,13 @@ matrix, precision, recall). Grad-CAM highlights which image regions drove each
 prediction, but since the dataset only has image-level labels and no ground-truth
 bounding boxes, this is an interpretability tool, not a validated tumor
 localization.
+
+**Held-out test set.** In the main experiments the validation set does two jobs at
+once: it picks the best epoch and it reports the score. Taking the maximum across
+epochs on the same data makes that score slightly optimistic. To quantify this, the
+best setup is retrained from scratch on a 70/15/15 patient-level split, where the
+test set is touched exactly once at the very end. The code asserts that the three
+patient sets do not overlap.
 
 ## Repository structure
 
@@ -130,11 +139,21 @@ usable. The overfit test (E0) confirms the pipeline can learn, so the modest sco
 reflects the difficulty and the data size rather than a bug, and the learning curve
 (E7) suggests that more data would help most.
 
-All reported AUC values come from the validation set. No separate test set was held
-out, because with so few cancer cases a single test split would be dominated by
-sampling noise. Robustness is instead estimated through repeated training with
-different seeds and a confidence interval (E5). More detail is in the notebook and
-in the thesis.
+On the held-out test set (126 patients, 340 images, never used for training or for
+picking the best epoch) the same setup reaches an **AUC of 0.669** (95 percent
+bootstrap confidence interval 0.609 to 0.727). This is essentially the same as the
+0.658 validation AUC of the final model, which means the reported validation scores
+were not noticeably inflated by selecting the best epoch. The test set also shows
+the asymmetry of the model: cancer recall is around 0.50 while healthy recall is
+around 0.77, so a relevant share of cancer cases is still missed.
+
+One caveat remains: the fine tuning depth (layer3 and layer4) and the learning rate
+were chosen in E3 and E4, which ran on all patients. The weights never see the test
+set, but the choice of configuration was informed by data that later ended up in it.
+A fully clean setup would require holding out the test set before any experiment.
+
+Detailed metrics for every run are in `results/`, and more detail is in the notebook
+and in the thesis.
 
 ## License
 
