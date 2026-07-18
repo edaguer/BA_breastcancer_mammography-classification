@@ -1,0 +1,22 @@
+Bezeichnung,Konfiguration,Kennzahl,Wert
+Modell A,"384px, 50/50",finale Val-AUC (bestes Val-Loss-Modell),0.5252
+Modell B,"384px, layer4, 50/50",finale Val-AUC (bestes Val-Loss-Modell),0.6195
+Modell C,"384px, + Alter",finale Val-AUC (bestes Val-Loss-Modell),0.6235
+E0 Overfit-Test,40 Bilder,Train-Loss Ende,0.0007
+E1 Auflösung,512px,beste Val-AUC,0.6381
+E2 alle Daten + pos_weight,384px,finale Val-AUC,0.6423
+E4 Lernrate,lr=1e-03,Val-AUC,0.6282
+E4 Lernrate,lr=3e-04,Val-AUC,0.6341
+E4 Lernrate,lr=1e-04,Val-AUC,0.6172
+E4 Lernrate,lr=3e-05,Val-AUC,0.6265
+E3 Auftau-Tiefe,fc,Val-AUC,0.5562
+E3 Auftau-Tiefe,layer4,Val-AUC,0.6314
+E3 Auftau-Tiefe,layer3_4,Val-AUC,0.6752
+E5 Seed-Robustheit,5 Seeds,Mittel-AUC,0.6051
+E6 Bild-Split,mit Leakage,Val-AUC,0.579
+E6 Patient-Split,ohne Leakage,Val-AUC,0.6172
+E3 Absicherung,layer4,Mittel-AUC,0.6054
+E3 Absicherung,layer3_4,Mittel-AUC,0.6881
+E7 Lernkurve,1869 Trainingsbilder,beste Val-AUC,0.6635
+Finales Modell,"layer3+4, alle Daten",beste Val-AUC,0.658
+Test-Set (unberührt),"70/15/15, layer3+4 (95%-KI 0.6091-0.7269)",Test-AUC,0.6685
