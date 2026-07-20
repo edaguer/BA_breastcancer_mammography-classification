@@ -1,5 +1,5 @@
+# bestimmte heruntergeladenen Patientenordner in Projektordner verschieben.
 # Datensatz erweitern: alle Krebsfälle + gleiche Menge gesunder Bilder
-# in den BA-Ordner train_images/ kopieren.
 # Standard: TROCKENLAUF (zeigt nur, was fehlt, kopiert nichts).
 # Zum echten Kopieren unten QUELLE auf deinen 300-GB-Download setzen.
 
@@ -8,10 +8,8 @@ import shutil
 import pandas as pd
 
 
-# Pfad zum vollständigen Kaggle-Download (Ordner, der die Patienten-Unterordner
-# enthält, also .../train_images). Leer lassen = nur Trockenlauf.
 QUELLE = r''   # hier eigenen Pfad zum vollständigen Kaggle-Download eintragen
-ZIEL   = 'train_images'          # dein BA-Ordner (relativ zum Projekt)
+ZIEL   = 'train_images'
 CSV    = 'train.csv'
 N_GESUND_ZIEL = 1158             # gleiche Menge wie Krebsfälle
 SEED   = 42
